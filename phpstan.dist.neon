@@ -1,0 +1,10 @@
+parameters:
+    level: 10
+    paths:
+        - config/
+        - src/
+        - tests/
+    tmpDir: var/cache/phpstan
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue
