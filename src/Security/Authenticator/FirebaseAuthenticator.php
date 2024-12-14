@@ -24,8 +24,10 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[WithMonologChannel('security')]
-final class FirebaseAuthenticator extends AbstractAuthenticator implements FirebaseAuthenticatorInterface
+final class FirebaseAuthenticator extends AbstractAuthenticator
 {
+    private const HEADER_IDENTITY_PROVIDER = 'RequestHeaderIdentityProvider';
+
     public function __construct(
         protected readonly TokenExtractorInterface $tokenExtractor,
         protected readonly TranslatorInterface $translator,
@@ -38,7 +40,7 @@ final class FirebaseAuthenticator extends AbstractAuthenticator implements Fireb
     public function supports(Request $request): bool
     {
         return false !== $this->tokenExtractor->extract($request)
-            && $request->headers->has(FirebaseAuthenticatorInterface::HEADER_IDENTITY_PROVIDER)
+            && $request->headers->has(self::HEADER_IDENTITY_PROVIDER)
         ;
     }
 
@@ -55,7 +57,7 @@ final class FirebaseAuthenticator extends AbstractAuthenticator implements Fireb
             throw new \LogicException('Unable to extract a JWT token from the request. Also, make sure to call `supports()` before `authenticate()` to get a proper client error.');
         }
 
-        $providerId = $request->headers->get(FirebaseAuthenticatorInterface::HEADER_IDENTITY_PROVIDER);
+        $providerId = $request->headers->get(self::HEADER_IDENTITY_PROVIDER);
 
         if (null === $providerId) {
             $this->logger->error(
