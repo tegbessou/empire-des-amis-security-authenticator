@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace EmpireDesAmis\SecurityAuthenticatorBundle\Services;
+namespace EmpireDesAmis\SecurityAuthenticatorBundle\Service;
 
 use EmpireDesAmis\SecurityAuthenticatorBundle\Event\UserAuthenticatedEvent;
 use EmpireDesAmis\SecurityAuthenticatorBundle\Exception\IdentityProviderDoesntExistException;
 use EmpireDesAmis\SecurityAuthenticatorBundle\Exception\InvalidTokenException;
-use EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\Authenticator\AuthenticateUserFromProviderFirebase;
+use EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\Authenticator\AuthenticateUserFromProviderFirebaseInterface;
 use EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\Enum\ProviderEnum;
 use EmpireDesAmis\SecurityAuthenticatorBundle\Security\Model\User;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -15,7 +15,7 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 final readonly class AuthenticateUserService
 {
     public function __construct(
-        private AuthenticateUserFromProviderFirebase $authenticateUserFromProvider,
+        private AuthenticateUserFromProviderFirebaseInterface $authenticateUserFromProvider,
         private EventDispatcherInterface $dispatcher,
     ) {
     }

@@ -8,7 +8,7 @@ use EmpireDesAmis\SecurityAuthenticatorBundle\Exception\ExpiredTokenException;
 use EmpireDesAmis\SecurityAuthenticatorBundle\Exception\InvalidPayloadException;
 use EmpireDesAmis\SecurityAuthenticatorBundle\Exception\InvalidTokenException;
 use EmpireDesAmis\SecurityAuthenticatorBundle\Security\Model\User;
-use EmpireDesAmis\SecurityAuthenticatorBundle\Services\AuthenticateUserService;
+use EmpireDesAmis\SecurityAuthenticatorBundle\Service\AuthenticateUserService;
 use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationFailureResponse;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\TokenExtractorInterface;
 use Monolog\Attribute\WithMonologChannel;

@@ -10,4 +10,4 @@ parameters:
             identifier: missingType.iterableValue
         -
             message: '#Variable \$userAuthenticated might not be defined.#'
-            path: src/Services/AuthenticateUserService.php
+            path: src/Service/AuthenticateUserService.php
