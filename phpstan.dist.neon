@@ -8,3 +8,6 @@ parameters:
     ignoreErrors:
         -
             identifier: missingType.iterableValue
+        -
+            message: '#Variable \$userAuthenticated might not be defined.#'
+            path: src/Services/AuthenticateUserService.php
