@@ -5,16 +5,9 @@ declare(strict_types=1);
 namespace EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\LogIn;
 
 use EmpireDesAmis\SecurityAuthenticatorBundle\Security\Model\Token;
-use Kreait\Firebase\Contract\Auth;
 
-final readonly class LogInFakeFirebase
+final readonly class LogInFakeFirebase implements LogInFirebaseInterface
 {
-    public function __construct(
-        /** @phpstan-ignore-next-line */
-        private Auth $auth,
-    ) {
-    }
-
     public function logInWithEmail(string $email, string $password): Token
     {
         return new Token(

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace EmpireDesAmis\SecurityAuthenticatorBundle\Tests\Security\Authenticator;
 
-use EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\Authenticator\AuthenticateUserFromProviderFirebase;
+use EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\Authenticator\AuthenticateUserFromProviderFirebaseInterface;
 use EmpireDesAmis\SecurityAuthenticatorBundle\Security\Authenticator\FirebaseAuthenticator;
-use EmpireDesAmis\SecurityAuthenticatorBundle\Services\AuthenticateUserService;
-use Kreait\Firebase\Auth\SignInResult;
-use Kreait\Firebase\Contract\Auth;
+use EmpireDesAmis\SecurityAuthenticatorBundle\Security\Model\User;
+use EmpireDesAmis\SecurityAuthenticatorBundle\Service\AuthenticateUserService;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\TokenExtractorInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -19,20 +18,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class FirebaseAuthenticatorTest extends TestCase
 {
-    private AuthenticateUserFromProviderFirebase $authenticator;
-
-    public function setUp(): void
-    {
-        $auth = $this->createMock(Auth::class);
-        $auth->method('signInWithIdpAccessToken')->willReturn(
-            SignInResult::fromData([
-                'email' => 'hugues.gobet@gmail.com',
-            ]),
-        );
-
-        $this->authenticator = new AuthenticateUserFromProviderFirebase($auth);
-    }
-
     public function testSupports(): void
     {
         $tokenExtractor = $this->createMock(TokenExtractorInterface::class);
@@ -41,8 +26,11 @@ final class FirebaseAuthenticatorTest extends TestCase
         ;
 
         $translator = $this->createMock(TranslatorInterface::class);
+
+        $authenticator = $this->createMock(AuthenticateUserFromProviderFirebaseInterface::class);
+
         $authenticateUserService = new AuthenticateUserService(
-            $this->authenticator,
+            $authenticator,
             new EventDispatcher(),
         );
 
@@ -71,8 +59,11 @@ final class FirebaseAuthenticatorTest extends TestCase
         ;
 
         $translator = $this->createMock(TranslatorInterface::class);
+
+        $authenticator = $this->createMock(AuthenticateUserFromProviderFirebaseInterface::class);
+
         $authenticateUserService = new AuthenticateUserService(
-            $this->authenticator,
+            $authenticator,
             new EventDispatcher(),
         );
 
@@ -101,8 +92,11 @@ final class FirebaseAuthenticatorTest extends TestCase
         ;
 
         $translator = $this->createMock(TranslatorInterface::class);
+
+        $authenticator = $this->createMock(AuthenticateUserFromProviderFirebaseInterface::class);
+
         $authenticateUserService = new AuthenticateUserService(
-            $this->authenticator,
+            $authenticator,
             new EventDispatcher(),
         );
 
@@ -130,8 +124,16 @@ final class FirebaseAuthenticatorTest extends TestCase
         ;
 
         $translator = $this->createMock(TranslatorInterface::class);
+
+        $authenticator = $this->createMock(AuthenticateUserFromProviderFirebaseInterface::class);
+        $authenticator->method('authenticateUserWithGoogle')
+            ->willReturn(
+                new User('hugues.gobet@gmail.com'),
+            )
+        ;
+
         $authenticateUserService = new AuthenticateUserService(
-            $this->authenticator,
+            $authenticator,
             new EventDispatcher(),
         );
 
@@ -160,8 +162,10 @@ final class FirebaseAuthenticatorTest extends TestCase
         ;
 
         $translator = $this->createMock(TranslatorInterface::class);
+
+        $authenticator = $this->createMock(AuthenticateUserFromProviderFirebaseInterface::class);
         $authenticateUserService = new AuthenticateUserService(
-            $this->authenticator,
+            $authenticator,
             new EventDispatcher(),
         );
 
@@ -189,8 +193,11 @@ final class FirebaseAuthenticatorTest extends TestCase
         ;
 
         $translator = $this->createMock(TranslatorInterface::class);
+
+        $authenticator = $this->createMock(AuthenticateUserFromProviderFirebaseInterface::class);
+
         $authenticateUserService = new AuthenticateUserService(
-            $this->authenticator,
+            $authenticator,
             new EventDispatcher(),
         );
 

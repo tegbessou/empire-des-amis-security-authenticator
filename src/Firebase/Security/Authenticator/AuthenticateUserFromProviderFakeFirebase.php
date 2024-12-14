@@ -5,16 +5,9 @@ declare(strict_types=1);
 namespace EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\Authenticator;
 
 use EmpireDesAmis\SecurityAuthenticatorBundle\Security\Model\User;
-use Kreait\Firebase\Contract\Auth;
 
-final readonly class AuthenticateUserFromProviderFakeFirebase
+final readonly class AuthenticateUserFromProviderFakeFirebase implements AuthenticateUserFromProviderFirebaseInterface
 {
-    public function __construct(
-        /** @phpstan-ignore-next-line */
-        private Auth $auth,
-    ) {
-    }
-
     public function authenticateUserWithApple(string $token): User
     {
         if ('tokenusernotexist' === $token) {

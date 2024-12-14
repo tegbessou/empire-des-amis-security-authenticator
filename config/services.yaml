@@ -7,3 +7,9 @@ services:
 
     EmpireDesAmis\SecurityAuthenticatorBundle\:
         resource: '../src/'
+
+    EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\Authenticator\AuthenticateUserFromProviderFirebase:
+        alias: EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\Authenticator\AuthenticateUserFromProviderFirebase
+
+    EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\LogIn\LogInFirebaseInterface:
+        alias: EmpireDesAmis\SecurityAuthenticatorBundle\Firebase\Security\LogIn\LogInFirebase

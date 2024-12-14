@@ -12,7 +12,7 @@ use Kreait\Firebase\Auth\SignIn\FailedToSignIn;
 use Kreait\Firebase\Contract\Auth;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\InvalidTokenException;
 
-final readonly class AuthenticateUserFromProviderFirebase
+final readonly class AuthenticateUserFromProviderFirebase implements AuthenticateUserFromProviderFirebaseInterface
 {
     public function __construct(
         private Auth $auth,
